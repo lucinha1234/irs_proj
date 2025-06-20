@@ -7,4 +7,4 @@ if [ -z "$1" ]; then
 fi
 
 # Call the Python script with the input path
-python3 src/csv2xml.py "$1" "output_csv/meta.json" "output_csv/file.csv"
+python3 xmlcsvconvert/csv2xml.py "$1" "output_csv/meta.json" "output_csv/file.csv"

@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
-from src.xml2csv import xml_to_csv  # Your existing function
-from src.csv2xml import csv_to_xml  # Assume you have a reverse function
+from xmlcsvconvert.xml2csv import xml_to_csv  # Your existing function
+from xmlcsvconvert.csv2xml import csv_to_xml  # Assume you have a reverse function
 
 def convert_xml_to_csv():
     filepath = filedialog.askopenfilename(filetypes=[("XML files", "*.xml")])
