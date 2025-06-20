@@ -1,0 +1,5 @@
+*/*.xml
+*/*.csv
+*/*.json
+!output_csv/.gitkeep
+!output_xml/.gitkeep
