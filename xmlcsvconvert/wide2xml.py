@@ -3,7 +3,7 @@ import pandas as pd
 import sys
 import xml.etree.ElementTree as ET
 
-def wide_to_long_xml(folder_path, output_xml):
+def wide_to_xml(folder_path, output_xml):
     root = ET.Element("Document")
 
     for filename in sorted(os.listdir(folder_path)):
@@ -58,4 +58,4 @@ if __name__ == "__main__":
         print(f"Folder not found: {input_folder}")
         sys.exit(1)
 
-    wide_to_long_xml(input_folder, output_file)
+    wide_to_xml(input_folder, output_file)

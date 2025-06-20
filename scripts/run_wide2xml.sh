@@ -6,4 +6,4 @@ if [ -z "$2" ]; then
   exit 1
 fi
 
-python3 xmlcsvconvert/wide2long.py "$1" "$2"
+python3 xmlcsvconvert/wide2xml.py "$1" "$2"

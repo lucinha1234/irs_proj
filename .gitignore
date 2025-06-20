@@ -3,3 +3,11 @@
 */*.json
 !output_csv/.gitkeep
 !output_xml/.gitkeep
+
+# python files
+*/__pycache__
+
+# project folders
+dist
+build
+*.spec
