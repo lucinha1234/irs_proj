@@ -2,7 +2,7 @@ import os
 import shutil
 import pandas as pd
 import pytest
-from xmlcsvconvert.long2wide import long_to_wide
+from xmlcsvconvert.split_long_to_tables import split_long_to_tables
 
 def load_csv(path):
     return pd.read_csv(path).sort_index(axis=1).fillna("")
@@ -16,7 +16,7 @@ def test_long_to_wide_with_sample_data(test_output_folder):
     input_csv = "sample/long.csv"
     expected_dir = "sample/tables"
     
-    long_to_wide(input_csv, str(test_output_folder))
+    split_long_to_tables(input_csv, str(test_output_folder))
 
     # Collect expected files
     expected_files = [f for f in os.listdir(expected_dir) if f.endswith(".csv")]

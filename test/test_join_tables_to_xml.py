@@ -2,30 +2,7 @@ import os
 import xml.etree.ElementTree as ET
 import pandas as pd
 import pytest
-from xmlcsvconvert.wide2xml import wide_to_xml
-
-def normalize_xml_element(elem):
-    """Recursively sort children and strip text/attributes for reliable comparison."""
-    # Sort children by tag and attributes
-    elem[:] = sorted(elem, key=lambda e: (e.tag, sorted(e.attrib.items())))
-    for child in elem:
-        normalize_xml_element(child)
-
-    # Strip leading/trailing whitespace from text
-    if elem.text:
-        elem.text = elem.text.strip()
-    if elem.tail:
-        elem.tail = elem.tail.strip()
-
-    # Sort attributes (not necessary for ElementTree equality, but useful for readability/debug)
-    elem.attrib = dict(sorted(elem.attrib.items()))
-
-def load_xml(path):
-    """Load and normalize XML file for comparison."""
-    tree = ET.parse(path)
-    root = tree.getroot()
-    normalize_xml_element(root)
-    return root
+from xmlcsvconvert.join_tables_to_xml import wide_to_xml
 
 @pytest.fixture
 def output_long_file(tmp_path):

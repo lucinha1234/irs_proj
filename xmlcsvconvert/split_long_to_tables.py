@@ -4,7 +4,7 @@ from collections import defaultdict
 import sys
 import os
 
-def long_to_wide(input_path, output_folder):
+def split_long_to_tables(input_path, output_folder):
     grouped_data = defaultdict(lambda: defaultdict(dict))
 
     with open(input_path, newline='', encoding='utf-8') as csvfile:
@@ -51,4 +51,4 @@ if __name__ == "__main__":
         print(f"File not found: {output_folder}")
         sys.exit(1)
 
-    long_to_wide(input_file, output_folder)
+    split_long_to_tables(input_file, output_folder)
