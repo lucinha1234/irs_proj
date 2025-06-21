@@ -4,7 +4,7 @@ import sys
 import xml.etree.ElementTree as ET
 
 def wide_to_xml(folder_path, output_xml):
-    root = ET.Element("Document")
+    root = ET.Element("Modelo")
 
     for filename in sorted(os.listdir(folder_path)):
         if not filename.startswith("table_") or not filename.endswith(".csv"):
@@ -18,25 +18,23 @@ def wide_to_xml(folder_path, output_xml):
         anexo, quadro, subquadro = parts[:3]
         df = pd.read_csv(os.path.join(folder_path, filename))
 
-        # Create XML elements
-        subquadro_elem = ET.SubElement(root, "SubQuadro", {
-            "Anexo": anexo,
-            "Quadro": quadro,
-            "Nome": subquadro
-        })
+        # Ensure structure: root -> Anexo -> Quadro -> Subquadro
+        anexo_elem = root.find(anexo)
+        if anexo_elem is None:
+            anexo_elem = ET.SubElement(root, anexo)
 
-        for _, row in df.iterrows():
-            if 'NLinha' in df.columns and not pd.isna(row['NLinha']):
-                numero = int(float(row['NLinha']))
-                linha_elem = ET.SubElement(subquadro_elem, "Linha", {"numero": str(numero)})
-            else:
-                linha_elem = ET.SubElement(subquadro_elem, "Linha")
+        quadro_elem = anexo_elem.find(quadro)
+        if quadro_elem is None:
+            quadro_elem = ET.SubElement(anexo_elem, quadro)
+
+        subquadro_elem = ET.SubElement(quadro_elem, subquadro)
+
+        for idx, (_, row) in enumerate(df.iterrows(), start=1):
+            linha_elem = ET.SubElement(subquadro_elem, f"{subquadro}-Linha", {"numero": str(idx)})
 
             for field in df.columns:
                 if pd.isna(row[field]):
                     continue
-                if field == 'NLinha':
-                    continue  # Already handled as attribute
                 field_elem = ET.SubElement(linha_elem, field)
                 field_elem.text = str(row[field])
 
