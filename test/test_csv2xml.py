@@ -1,18 +1,28 @@
-import xml.etree.ElementTree as ET
 import pytest
+import xml.etree.ElementTree as ET
 from xmlcsvconvert.csv2xml import csv_to_xml
 
-def normalize_xml(xml_path):
-    tree = ET.parse(xml_path)
-    root = tree.getroot()
+import xml.etree.ElementTree as ET
 
-    def recursive_sort(elem):
-        elem[:] = sorted(elem, key=lambda e: e.tag)
-        for child in elem:
-            recursive_sort(child)
+def elements_equal(e1, e2):
+    if e1.tag != e2.tag:
+        return False
+    if (e1.text or '').strip() != (e2.text or '').strip():
+        return False
+    if (e1.tail or '').strip() != (e2.tail or '').strip():
+        return False
+    if sorted(e1.attrib.items()) != sorted(e2.attrib.items()):
+        return False
+    if len(e1) != len(e2):
+        return False
+    return all(elements_equal(c1, c2) for c1, c2 in zip(e1, e2))
 
-    recursive_sort(root)
-    return ET.tostring(root, encoding="unicode")
+def compare_xml_files(path1, path2):
+    tree1 = ET.parse(path1)
+    tree2 = ET.parse(path2)
+    root1 = tree1.getroot()
+    root2 = tree2.getroot()
+    return elements_equal(root1, root2)
 
 @pytest.fixture
 def output_xml_file(tmp_path):
@@ -28,8 +38,4 @@ def test_csv_to_xml_conversion(output_xml_file):
     
     assert output_xml_file.exists()
 
-    result_xml = normalize_xml(output_xml_file)
-    print("result_xml:",result_xml)
-    expected_xml_str = normalize_xml(expected_xml)
-    print("expected_xml_str:",expected_xml_str)
-    assert result_xml == expected_xml_str
+    assert compare_xml_files(output_xml_file, expected_xml)

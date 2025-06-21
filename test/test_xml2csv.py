@@ -12,7 +12,7 @@ def output_csv_file(tmp_path):
 
 def test_xml_to_csv_conversion(output_csv_file):
     input_xml = "sample/long.xml"
-    expected_csv = "sample/expected/output.csv"
+    expected_csv = "sample/long.csv"
 
     # Run conversion
     xml_to_csv(input_xml)

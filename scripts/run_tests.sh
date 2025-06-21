@@ -1,4 +1,4 @@
 #!/bin/bash
 
 echo "🧪 Running unit tests..."
-pytest tests -v
+pytest-3 test -v

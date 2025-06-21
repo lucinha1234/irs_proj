@@ -8,6 +8,17 @@ Works for other purposes, since the xml <-> csv conversion is agnostic to node n
 
 ## How to install
 
+### Install dependences
+
+```
+pip install -r requirements.txt
+```
 
 ## How to run
+
+```
+
+```
+
+## Workflow
 
