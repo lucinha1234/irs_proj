@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
 import pytest
-from irshelpertool.join_tables_to_xml import join_tables_to_xml
+from irshelper.join_tables_to_xml import join_tables_to_xml
 
 @pytest.fixture
 def output_long_file(tmp_path):

@@ -1,4 +1,4 @@
-# IRS helper tool
+# IRS Helper
 
 This tool helps you fill in your IRS in CSV files instead of the platform.
 
@@ -19,21 +19,20 @@ This is helpful when you need to fill endless rows in tables with, for instance,
 
 ### Windows
 
-1. Download and run `xmlcsvtool-setup.exe`.
+1. Download and run `irshelper-setup.exe`.
 2. Follow the graphical installer steps.
 
 ### Linux
 
 1. Download debian package
-wget https://github.com/yourusername/yourrepo/releases/download/v1.0.0/myapp.deb
+wget https://github.com/yourusername/yourrepo/releases/download/v1.0.0/irshelper.deb
 2. Install
-sudo dpkg -i myapp.deb
+sudo dpkg -i irshelpertool.deb
 3. Start using the tool.
 
 ## How to build
 
-
 ```
 pip install -r requirements.txt
-python src/xmlcsvtool/gui.py
+python src/irshelper/gui.py
 ```

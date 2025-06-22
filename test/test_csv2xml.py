@@ -1,6 +1,6 @@
 import pytest
 import xml.etree.ElementTree as ET
-from irshelpertool.csv_to_xml import csv_to_xml
+from irshelper.csv_to_xml import csv_to_xml
 
 import xml.etree.ElementTree as ET
 

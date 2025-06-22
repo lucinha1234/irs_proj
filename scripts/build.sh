@@ -4,8 +4,8 @@
 set -e
 
 # Define variables
-MAIN_SCRIPT="src/irshelpertool/gui.py"
-APP_NAME="irshelpertool"
+MAIN_SCRIPT="src/irshelper/gui.py"
+APP_NAME="irshelper"
 
 echo "🔧 Cleaning previous build..."
 rm -rf build dist *.spec

@@ -1,7 +1,7 @@
 import os
 import csv
 import pytest
-from irshelpertool.split_long_to_tables import split_long_to_tables
+from irshelper.split_long_to_tables import split_long_to_tables
 
 def load_csv(path):
     with open(path, newline='', encoding='utf-8') as f:
