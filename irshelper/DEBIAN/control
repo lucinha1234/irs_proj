@@ -1,0 +1,8 @@
+Package: irshelper
+Version: 1.0.0
+Section: base
+Priority: optional
+Architecture: all
+Depends: python3
+Maintainer: Lucia Carreira <lucia.m.carreira@gmail.com>
+Description: irshelper - a tool that helps you file your IRS in CSV

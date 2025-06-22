@@ -9,6 +9,6 @@
 */*/__pycache__
 
 # project folders
-dist
+irshelper/usr/local/bin/*
 build
 *.spec

@@ -3,7 +3,7 @@
 echo "🧹 Cleaning build artifacts..."
 
 # PyInstaller artifacts
-rm -rf build dist *.spec
+rm -rf build irshelper/usr/local/bin/irshelper *.spec
 
 # Python packaging artifacts
 rm -rf *.egg-info

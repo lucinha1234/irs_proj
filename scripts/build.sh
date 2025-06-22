@@ -6,17 +6,18 @@ set -e
 # Define variables
 MAIN_SCRIPT="src/irshelper/gui.py"
 APP_NAME="irshelper"
+DESTINATION="./irshelper/usr/local/bin"
 
 echo "🔧 Cleaning previous build..."
-rm -rf build dist *.spec
+rm -rf build $DESTINATION *.spec
 
 echo "📦 Installing dependencies..."
 pip install -r requirements.txt
 
 echo "🚀 Building executable..."
-pyinstaller --noconfirm --onefile --windowed "$MAIN_SCRIPT" --name "$APP_NAME"
+pyinstaller --noconfirm --onefile --windowed "$MAIN_SCRIPT" --name "$APP_NAME" --distpath="$DESTINATION" --workpath=build
 
-echo "✅ Build complete. Executable is in ./dist/$APP_NAME"
+echo "✅ Build complete. Executable is in $DESTINATION/$APP_NAME"
 
 # Control file
 #cat > myapp/DEBIAN/control <<EOF
