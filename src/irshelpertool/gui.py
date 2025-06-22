@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
-from src.xmlcsvconvert import xml_to_csv, csv_to_xml, join_tables_to_xml, split_long_to_tables
+from irshelpertool import xml_to_csv, csv_to_xml, join_tables_to_xml, split_long_to_tables
 
 def convert_xml_to_csv():
     filepath = filedialog.askopenfilename(filetypes=[("XML file", "*.xml")])

@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import pytest
-from xmlcsvconvert.xml_to_csv import xml_to_csv
+from irshelpertool.xml_to_csv import xml_to_csv
 
 def load_csv(path):
     return pd.read_csv(path).fillna("").sort_index(axis=1).reset_index(drop=True)
