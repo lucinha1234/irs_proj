@@ -1,4 +1,4 @@
 #!/bin/bash
 
 echo "🧪 Running unit tests..."
-pytest-3 test -v
+PYTHONPATH="$PYTHONPATH:$(pwd)/../src" pytest -v

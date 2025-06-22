@@ -10,6 +10,9 @@ APP_NAME="xmlcsvtool"
 echo "🔧 Cleaning previous build..."
 rm -rf build dist *.spec
 
+echo "📦 Installing dependencies..."
+pip install -r requirements.txt
+
 echo "🚀 Building executable..."
 pyinstaller --noconfirm --onefile --windowed "$MAIN_SCRIPT" --name "$APP_NAME"
 

@@ -2,7 +2,7 @@ import os
 import xml.etree.ElementTree as ET
 import pandas as pd
 import pytest
-from xmlcsvconvert.join_tables_to_xml import wide_to_xml
+from xmlcsvconvert.join_tables_to_xml import join_tables_to_xml
 
 @pytest.fixture
 def output_long_file(tmp_path):
@@ -28,7 +28,7 @@ def test_wide_to_xml_conversion(output_long_file):
     input_folder = "sample/tables"
     expected_xml = "sample/long.xml"
 
-    wide_to_xml(input_folder, str(output_long_file))
+    join_tables_to_xml(input_folder, str(output_long_file))
 
     assert output_long_file.exists(), "Output long-format file not created"
     print("output_long_file:",output_long_file)

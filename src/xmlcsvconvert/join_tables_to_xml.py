@@ -1,9 +1,9 @@
 import os
-import pandas as pd
 import sys
 import xml.etree.ElementTree as ET
+import csv
 
-def wide_to_xml(folder_path, output_xml):
+def join_tables_to_xml(folder_path, output_xml):
     root = ET.Element("Modelo")
 
     for filename in sorted(os.listdir(folder_path)):
@@ -16,8 +16,11 @@ def wide_to_xml(folder_path, output_xml):
             continue
 
         anexo, quadro, subquadro = parts[:3]
-        df = pd.read_csv(os.path.join(folder_path, filename))
-
+        csv_path = os.path.join(folder_path, filename)
+        if not os.path.isfile(csv_path):
+            print(f"File not found: {csv_path}")
+            continue
+        
         # Ensure structure: root -> Anexo -> Quadro -> Subquadro
         anexo_elem = root.find(anexo)
         if anexo_elem is None:
@@ -29,11 +32,13 @@ def wide_to_xml(folder_path, output_xml):
 
         subquadro_elem = ET.SubElement(quadro_elem, subquadro)
 
-        for idx, (_, row) in enumerate(df.iterrows(), start=1):
-            linha_elem = ET.SubElement(subquadro_elem, f"{subquadro}-Linha", {"numero": str(idx)})
+        with open(csv_path, newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for idx, row in enumerate(reader, start=1):
+                linha_elem = ET.SubElement(subquadro_elem, f"{subquadro}-Linha", {"numero": str(idx)})
 
-            for field in df.columns:
-                if pd.isna(row[field]):
+            for field in row.keys():
+                if not row[field]:
                     continue
                 field_elem = ET.SubElement(linha_elem, field)
                 field_elem.text = str(row[field])
@@ -56,4 +61,4 @@ if __name__ == "__main__":
         print(f"Folder not found: {input_folder}")
         sys.exit(1)
 
-    wide_to_xml(input_folder, output_file)
+    join_tables_to_xml(input_folder, output_file)
