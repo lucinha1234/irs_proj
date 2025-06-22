@@ -24,11 +24,12 @@ def split_long_to_tables(input_path, output_folder):
     # Save each table to a CSV file
     for key, lines in grouped_data.items():
         with open(f"{output_folder}/table_{'_'.join(key)}.csv", 'w', newline='', encoding='utf-8') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=['NLinha'] + list(lines.values())[0].keys())
+            fieldnames = list(list(lines.values())[0].keys())
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             for linha, fields in lines.items():
                 writer.writerow({'NLinha': linha, **fields})
-        print(f"Saved: {input_path}")
+        print(f"Saved: {csvfile.name}")
 
 # Command-line entry
 if __name__ == "__main__":

@@ -6,6 +6,7 @@
 
 # python files
 */__pycache__
+*/*/__pycache__
 
 # project folders
 dist

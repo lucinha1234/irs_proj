@@ -1,11 +1,14 @@
 import os
-import shutil
-import pandas as pd
+import csv
 import pytest
 from xmlcsvconvert.split_long_to_tables import split_long_to_tables
 
 def load_csv(path):
-    return pd.read_csv(path).sort_index(axis=1).fillna("")
+    with open(path, newline='', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        rows = [dict(sorted(row.items())) for row in reader]
+    # Sort rows for comparison
+    return sorted(rows, key=lambda x: tuple(x.values()))
 
 @pytest.fixture
 def test_output_folder(tmp_path):
@@ -29,5 +32,5 @@ def test_long_to_wide_with_sample_data(test_output_folder):
         expected_df = load_csv(os.path.join(expected_dir, file))
         
         result_df = load_csv(os.path.join(test_output_folder, file))
-        
-        pd.testing.assert_frame_equal(result_df, expected_df, check_dtype=False)
+
+        assert result_df == expected_df, "Mismatch in output file contents"
